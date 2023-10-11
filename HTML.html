@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create a Blog</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Create a Blog</h1>
+    </header>
+    <main>
+        <section id="blog-editor">
+            <h2>Blog Editor</h2>
+            <div class="editor">
+                <textarea id="blog-text" placeholder="Write your blog here..."></textarea>
+                <button id="add-image">Add Image</button>
+                <input type="file" id="image-upload" accept="image/*">
+                <button id="add-video">Add Video</button>
+                <input type="text" id="video-url" placeholder="Paste video URL">
+                <button id="publish-blog">Publish</button>
+            </div>
+        </section>
+        <section id="preview">
+            <h2>Blog Preview</h2>
+            <div id="blog-preview">
+            </div>
+        </section>
+    </main>
+    <script src="JS.js"></script>
+</body>
+</html>
