@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Conferencing</title>
+    <style>
+        #videos {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div id="videos"></div>
+    <div>
+        <textarea id="chatBox" placeholder="Type your message"></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const peerConnection = new RTCPeerConnection();
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                const localVideo = document.createElement("video");
+                localVideo.srcObject = stream;
+                localVideo.muted = true;
+                document.getElementById("videos").appendChild(localVideo);
+
+                stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+            })
+            .catch(error => console.error("Error accessing media devices:", error));
+
+        peerConnection.ontrack = event => {
+            const remoteVideo = document.createElement("video");
+            remoteVideo.srcObject = event.streams[0];
+            document.getElementById("videos").appendChild(remoteVideo);
+        };
+
+        function sendMessage() {
+            const message = document.getElementById("chatBox").value;
+            // Send the message to the backend or other peer
+            console.log("Sending message:", message);
+        }
+    </script>
+</body>
+</html>
